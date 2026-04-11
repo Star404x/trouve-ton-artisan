@@ -12,7 +12,10 @@ function Home() {
     const fetchTopArtisans = async () => {
       try {
         const response = await api.get("/artisans/top");
-        setTopArtisans(response.data);
+        console.log("TOP ARTISANS API:", response.data);
+        setTopArtisans(
+          response.data.data || response.data.artisans || response.data,
+        );
       } catch (err) {
         console.error(err);
         setError("Impossible de charger les artisans du mois.");
@@ -102,7 +105,7 @@ function Home() {
         {loading && <p>Chargement des artisans...</p>}
         {error && <p className="text-danger">{error}</p>}
 
-        {!loading && !error && (
+        {!loading && !error && Array.isArray(topArtisans) && (
           <div className="row g-4">
             {topArtisans.map((artisan) => (
               <ArtisanCard key={artisan.id} artisan={artisan} />
