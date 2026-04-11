@@ -6,7 +6,7 @@ const {
   getTopArtisans,
   getArtisanById,
   searchArtisans,
-} = require("../controllers/artisan.controllers");
+} = require("../controllers/artisan.controller");
 
 // 🔥 ordre important
 router.get("/top", getTopArtisans);
