@@ -22,11 +22,8 @@ app.use(helmet());
 
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://trouve-ton-artisan-hz4ry1ci9-star404xs-projects.vercel.app",
-    ],
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    origin: ["http://localhost:5173", process.env.FRONTEND_URL],
+    credentials: true,
   }),
 );
 
