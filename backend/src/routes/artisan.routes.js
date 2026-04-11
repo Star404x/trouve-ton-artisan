@@ -1,0 +1,17 @@
+const express = require("express");
+const router = express.Router();
+
+const {
+  getAllArtisans,
+  getTopArtisans,
+  getArtisanById,
+  searchArtisans,
+} = require("../controllers/artisan.controllers");
+
+// 🔥 ordre important
+router.get("/top", getTopArtisans);
+router.get("/search", searchArtisans);
+router.get("/", getAllArtisans);
+router.get("/:id", getArtisanById);
+
+module.exports = router;
