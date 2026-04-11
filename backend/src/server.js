@@ -9,10 +9,10 @@ const startServer = async () => {
     await sequelize.authenticate();
     console.log("✅ Connexion à la base de données réussie.");
 
-    // optionnel : synchronisation (à éviter en prod)
-    // await sequelize.sync();
+    await sequelize.sync();
+    console.log("Tables synchronisees.");
 
-    app.listen(PORT, () => {
+    app.listen(PORT, "0.0.0.0", () => {
       console.log(`🚀 Serveur lancé sur http://localhost:${PORT}`);
     });
   } catch (error) {
