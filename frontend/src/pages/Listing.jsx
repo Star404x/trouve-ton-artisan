@@ -20,57 +20,60 @@ function Listing() {
   const [error, setError] = useState("");
 
   const fetchCategories = async () => {
-    try {
-      const response = await api.get("/categories");
-      setCategories(response.data);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  try {
+    const response = await api.get("/categories");
+    console.log("CATEGORIES DATA:", response.data);
+    setCategories(response.data);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
   const fetchArtisans = async (category = "") => {
-    try {
-      setLoading(true);
-      setError("");
+  try {
+    setLoading(true);
+    setError("");
 
-      const url = category
-        ? `/artisans?category=${encodeURIComponent(category)}`
-        : "/artisans";
+    const url = category
+      ? `/artisans?category=${encodeURIComponent(category)}`
+      : "/artisans";
 
-      const response = await api.get(url);
-      setArtisans(response.data);
-    } catch (err) {
-      console.error(err);
-      setError("Impossible de charger les artisans.");
-    } finally {
-      setLoading(false);
-    }
-  };
+    const response = await api.get(url);
+    console.log("ARTISANS DATA:", response.data);
+    setArtisans(response.data);
+  } catch (err) {
+    console.error(err);
+    setError("Impossible de charger les artisans.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const fetchSearchResults = async (term, category = "") => {
-    try {
-      setLoading(true);
-      setError("");
+  try {
+    setLoading(true);
+    setError("");
 
-      const response = await api.get(
-        `/artisans/search?q=${encodeURIComponent(term)}`,
+    const response = await api.get(
+      `/artisans/search?q=${encodeURIComponent(term)}`,
+    );
+    console.log("SEARCH DATA:", response.data);
+    let results = response.data;
+
+    if (category) {
+      results = results.filter(
+        (artisan) => artisan.Specialite?.Category?.name === category,
       );
-      let results = response.data;
-
-      if (category) {
-        results = results.filter(
-          (artisan) => artisan.Specialite?.Category?.name === category,
-        );
-      }
-
-      setArtisans(results);
-    } catch (err) {
-      console.error(err);
-      setError("Impossible d'effectuer la recherche.");
-    } finally {
-      setLoading(false);
     }
-  };
+
+    setArtisans(results);
+  } catch (err) {
+    console.error(err);
+    setError("Impossible d'effectuer la recherche.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const updateUrlParams = (searchValue, categoryValue) => {
     const params = {};
