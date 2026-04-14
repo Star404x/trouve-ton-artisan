@@ -54,7 +54,7 @@ const Artisan = sequelize.define(
       type: DataTypes.INTEGER,
       allowNull: false,
       references: {
-        model: "specialites", // nom de la table
+        model: "specialites",
         key: "id",
       },
     },

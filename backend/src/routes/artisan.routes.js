@@ -8,7 +8,7 @@ const {
   searchArtisans,
 } = require("../controllers/artisan.controller");
 
-// 🔥 ordre important
+
 router.get("/top", getTopArtisans);
 router.get("/search", searchArtisans);
 router.get("/", getAllArtisans);

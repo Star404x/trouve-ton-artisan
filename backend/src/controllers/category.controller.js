@@ -6,15 +6,15 @@ const getAllCategories = async (req, res) => {
       include: [
         {
           model: Specialite,
-          required: false, // évite de filtrer les catégories sans spécialités
+          required: false, 
         },
       ],
-      order: [["name", "ASC"]], // optionnel : tri alphabétique
+      order: [["name", "ASC"]], 
     });
 
     res.status(200).json(categories);
   } catch (error) {
-    console.error(error); // important pour debug
+    console.error(error); 
     res.status(500).json({
       message: "Erreur lors de la récupération des catégories.",
     });
